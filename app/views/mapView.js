@@ -3,7 +3,10 @@ define(['underscore', 'backbone', 'jst!../templates/mapView.html'], function(_, 
         template: template,
         templateModel: {},
 
-        initialize: function() {
+        initialize: function(options) {
+            this.myEvents = options.myEvents;
+
+            this.myEvents.on('searchEvent', this.showNewMap.bind(this));
             this.render();
         },
 
@@ -13,6 +16,16 @@ define(['underscore', 'backbone', 'jst!../templates/mapView.html'], function(_, 
                 navigator.geolocation.getCurrentPosition(this.showGMap.bind(this));
             }
             return this;
+        },
+
+        showNewMap: function(str) {
+            var pos = str.split(',');
+            var position = {coords: {
+                latitude: pos[0],
+                longitude: pos[1]
+            }};
+            
+            this.showGMap(position);
         },
 
         showGMap: function(position) {

@@ -1,7 +1,7 @@
 define(['underscore', 'backbone', 'jst!../templates/main.html', './headerRow', './mapView', './picturesView'],
     function(_, Backbone, template, HeaderRow, MapView, PicturesView) {
 
-    var headerRow, mapView, picturesView;
+    var headerRow, mapView, picturesView, myEvents;
 
     return Backbone.View.extend({
         template: template,
@@ -9,6 +9,7 @@ define(['underscore', 'backbone', 'jst!../templates/main.html', './headerRow', '
         templateModel: {},
 
         initialize: function() {
+            myEvents = _.extend({}, Backbone.Events);
             this.render();
         },
 
@@ -16,9 +17,9 @@ define(['underscore', 'backbone', 'jst!../templates/main.html', './headerRow', '
             this.$el.html(this.template(this.templateModel));
 
             // loading sub-views
-            headerRow = new HeaderRow({el: '.header_content'});
-            mapView = new MapView({el: '.main_line .right'});
-            picturesView = new PicturesView({el: '.main_line .left'})
+            headerRow = new HeaderRow({el: '.header_content', myEvents: myEvents});
+            mapView = new MapView({el: '.main_line .right', myEvents: myEvents});
+            picturesView = new PicturesView({el: '.main_line .left', myEvents: myEvents})
 
             return this;
         }

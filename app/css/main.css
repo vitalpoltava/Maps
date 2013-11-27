@@ -20,6 +20,15 @@ html, body, #root, .container {
     width: 30em;
 }
 
+.search_validation_error {
+    background-color: darkred;
+    padding-left: 5px;
+    color: white;
+    display:none;
+    width: 30em;
+    border: 1px solid white;
+}
+
 /* Main Content */
 
 #map-canvas {
@@ -47,4 +56,11 @@ html, body, #root, .container {
 .main_line .right {
     background-color: white;
     padding: 0;
+    text-align: center;
+}
+
+.centered {
+    position: relative;
+    display: inline-block;
+    margin: 40% auto;
 }

@@ -3,13 +3,53 @@ define(['underscore', 'backbone', 'jst!../templates/headerRow.html'], function(_
         template: template,
         templateModel: {},
 
-        initialize: function() {
+        events: {
+            'click input.search': 'triggerSearch',
+            'keydown': 'triggerKeySearch'
+        },
+
+        initialize: function(options) {
+            this.myEvents = options.myEvents;
             this.render();
         },
 
         render: function() {
             this.$el.html(this.template(this.templateModel));
             return this;
+        },
+
+        validateSearch: function(query) {
+            return !!query && /^([-+]?\d+(\.\d+)?),\s*([-+]?\d+(\.\d+)?)$/.test(query);
+        },
+
+        showValidationError: function(err) {
+            this.$error = this.$error || $('.search_validation_error');
+            this.$error.fadeIn(function(){
+                var $err = $(this);
+                _.delay(function() {
+                    $err.fadeOut();
+                }, 2000);
+            }).html(err);
+        },
+
+        triggerKeySearch: function(e) {
+            this.$input = this.$input || $('input.input_field');
+            var code = e.which || e.keyCode;
+
+            if (this.$input.is(':focus') && code === 13) {
+                this.triggerSearch(e);
+            }
+        },
+
+        triggerSearch: function(e) {
+            this.$input = this.$input || $('input.input_field');
+            var query = this.$input.val();
+
+            if (this.validateSearch(query)) {
+                this.myEvents.trigger('searchEvent', query);
+            } else {
+                this.showValidationError('Search is invalid!');
+            }
         }
     });
 });
