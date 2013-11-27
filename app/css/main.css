@@ -51,6 +51,7 @@ html, body, #root, .container {
 .main_line .left {
     background-color: honeydew;
     border-right: 1px solid lightgray;
+    overflow-y: auto;
 }
 
 .main_line .right {
@@ -63,4 +64,38 @@ html, body, #root, .container {
     position: relative;
     display: inline-block;
     margin: 40% auto;
+}
+
+/* Pictures */
+
+.pics_progress {
+    padding: 10px;
+    background-color: darkcyan;
+    color: white;
+    text-align: center;
+    border: 1px solid white;
+    display: none;
+}
+
+.thumb_item {
+    padding: 5px;
+}
+
+.thumb_item img {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.thumb_item table {
+    width: 100%;
+}
+
+.td_pic {
+    vertical-align: middle;
+    padding-left: 5px;
+    width: 40%;
+}
+
+.td_addr {
+    vertical-align: middle;
 }
