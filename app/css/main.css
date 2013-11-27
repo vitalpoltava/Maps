@@ -1,0 +1,50 @@
+html, body, #root, .container {
+    position: relative;
+    height: 100%;
+}
+
+/* Header */
+
+.header {
+    position: relative;
+    height: 5em;
+    background-color: lightgray;
+    padding: 1.5em 0;
+}
+
+.header_content_view {
+    height: 2em;
+}
+
+.header_content_view input[type="text"] {
+    width: 30em;
+}
+
+/* Main Content */
+
+#map-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.main_line {
+    border: 1px solid lightgray;
+    position: relative;
+    height: 89%;
+}
+
+.main_line .left, .main_line .right {
+    position: relative;
+    height: 100%;
+}
+
+.main_line .left {
+    background-color: honeydew;
+    border-right: 1px solid lightgray;
+}
+
+.main_line .right {
+    background-color: white;
+    padding: 0;
+}
