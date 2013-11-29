@@ -10,6 +10,7 @@ define(['underscore', 'backbone', 'jst!../templates/headerRow.html'], function(_
 
         initialize: function(options) {
             this.myEvents = options.myEvents;
+            this.myEvents.on('pictureClick', this.populateCoords.bind(this));
             this.render();
         },
 
@@ -41,7 +42,7 @@ define(['underscore', 'backbone', 'jst!../templates/headerRow.html'], function(_
             }
         },
 
-        triggerSearch: function(e) {
+        triggerSearch: function() {
             this.$input = this.$input || $('input.input_field');
             var query = this.$input.val();
 
@@ -50,6 +51,12 @@ define(['underscore', 'backbone', 'jst!../templates/headerRow.html'], function(_
             } else {
                 this.showValidationError('Search is invalid!');
             }
+        },
+
+        populateCoords: function(pos, invoke) {
+            this.$input = this.$input || $('input.input_field');
+            this.$input.focus().val(pos);
+            if (invoke) this.triggerSearch();
         }
     });
 });

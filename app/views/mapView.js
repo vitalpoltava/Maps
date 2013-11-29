@@ -9,6 +9,7 @@ define(['underscore', 'backbone', 'jst!../templates/mapView.html', '../collectio
             this.myEvents = options.myEvents;
 
             this.myEvents.on('searchEvent', this.showNewMap.bind(this));
+            this.myEvents.on('pictureClick', this.drawNewMap.bind(this))
             this.render();
         },
 
@@ -30,11 +31,22 @@ define(['underscore', 'backbone', 'jst!../templates/mapView.html', '../collectio
             this.showGMap(position);
         },
 
-        showGMap: function(position) {
+        drawNewMap: function(pos) {
+            var coords = pos.split(',');
+            var latLng = {
+                coords: {
+                    latitude: coords[0],
+                    longitude: coords[1]
+                }
+            };
+            this.showGMap(latLng, 16);
+        },
+
+        showGMap: function(position, zoom) {
             var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             var mapOptions = {
                 center: myLatlng,
-                zoom: 8
+                zoom: zoom || 8
             };
             var map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
