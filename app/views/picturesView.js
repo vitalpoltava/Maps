@@ -1,5 +1,6 @@
 define(['underscore', 'backbone', 'jst!../templates/picturesView.html', './renderOneThumb'],
     function(_, Backbone, template, RenderOneThumb) {
+
     return Backbone.View.extend({
         template: template,
         templateModel: {},
@@ -20,13 +21,13 @@ define(['underscore', 'backbone', 'jst!../templates/picturesView.html', './rende
 
         initPicRequest: function(list) {
             this.$pics = this.$pics || $('.pictures_list');
-            this.list = list;
             this.$pics.empty();
-            this.list.forEach(this.renderList.bind(this));
+            this.collection = list;
+            this.collection.forEach(this.renderList.bind(this));
         },
 
         renderList: function(place, index, list) {
-            var photos = place.photos;
+            var photos = place.get('photos');
             if (!photos || index > 10) return;
 
             new RenderOneThumb({el: this.$pics, myEvents: this.myEvents, photo: _.first(photos), place: place});

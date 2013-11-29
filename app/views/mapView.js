@@ -1,5 +1,5 @@
-define(['underscore', 'backbone', 'jst!../templates/mapView.html'], function(_, Backbone, template) {
-    var map, marker, myLatlng, mapOptions;
+define(['underscore', 'backbone', 'jst!../templates/mapView.html', '../collections/places'],
+    function(_, Backbone, template, Places) {
 
     return Backbone.View.extend({
         template: template,
@@ -31,30 +31,33 @@ define(['underscore', 'backbone', 'jst!../templates/mapView.html'], function(_, 
         },
 
         showGMap: function(position) {
-            myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            mapOptions = {
+            var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var mapOptions = {
                 center: myLatlng,
                 zoom: 8
             };
-            map = new google.maps.Map(document.getElementById("map-canvas"),
+            var map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
 
-            marker = new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
                 animation: google.maps.Animation.DROP,
                 title:"Place of search..."
             });
 
-            google.maps.event.addListener(marker, 'click', this.showPictures.bind(this));
+            google.maps.event.addListener(marker, 'click', this.showPictures.bind(this, map, myLatlng));
         },
 
-        showPictures: function() {
+        showPictures: function(map, myLatlng) {
             this.myEvents.trigger('clickMarkerStart');
             var service = new google.maps.places.PlacesService(map);
+
+            // Using Google search to get data
             service.nearbySearch({location: myLatlng, radius: 10000}, function(data) {
+                this.collection = new Places(data);
                 this.myEvents.trigger('clickMarkerEnd');
-                this.myEvents.trigger('showPictures', data);
+                this.myEvents.trigger('showPictures', this.collection);
             }.bind(this));
         }
     });

@@ -9,6 +9,7 @@ html, body, #root, .container {
     position: relative;
     height: 5em;
     background-color: lightgray;
+    border-bottom: 1px solid #808080;
     padding: 1.5em 0;
 }
 
@@ -84,6 +85,19 @@ html, body, #root, .container {
 .thumb_item img {
     border: 1px solid white;
     border-radius: 5px;
+    filter: url(filters.svg#grayscale);
+    filter: gray;
+    -webkit-filter: grayscale(1);
+}
+
+.thumb_item:hover {
+    box-shadow:inset 0 0 5px gray;
+    border-radius: 5px;
+}
+
+.thumb_item:hover img {
+    filter: none;
+    -webkit-filter: grayscale(0);
 }
 
 .thumb_item table {

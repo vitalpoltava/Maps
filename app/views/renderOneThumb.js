@@ -1,4 +1,6 @@
-define(['underscore', 'backbone', 'jst!../templates/thumbItem.html'], function(_, Backbone, template) {
+define(['underscore', 'backbone', 'jst!../templates/thumbItem.html'],
+    function(_, Backbone, template) {
+
     return Backbone.View.extend({
         template: template,
         templateModel: {},
@@ -13,7 +15,9 @@ define(['underscore', 'backbone', 'jst!../templates/thumbItem.html'], function(_
         render: function() {
             this.templateModel = {
                 "url": this.photo.getUrl({'maxWidth': 100, 'maxHeight': 100}),
-                "addr" : this.place.name
+                "addr" : this.place.get('name'),
+                "lat": this.place.get('geometry').location.ob,
+                "lng": this.place.get('geometry').location.pb
             };
             this.$el.append(this.template(this.templateModel));
             return this;
