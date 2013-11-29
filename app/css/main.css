@@ -113,4 +113,5 @@ html, body, #root, .container {
 
 .td_addr {
     vertical-align: middle;
+    padding-left: 7px;
 }
