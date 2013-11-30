@@ -8,5 +8,5 @@ Couple of screenshots: [screenshot](https://docs.google.com/file/d/0B6NL_hzMVs83
 ## Usage
 
  - Fork repo;
- - load to runnable environment (I use WebStorm IDE);
+ - load to runnable environment (I use the `WebStorm` IDE);
  - launch `index.html`.
