@@ -18,5 +18,5 @@ On clicking the `marker` you will see a list pictures snapped nearby. If you cli
 ## Usage
 
  - Fork repo;
- - Load to runnable environment (I use the `WebStorm` IDE);
+ - Load it to runnable environment (I use the `WebStorm` IDE);
  - Launch `index.html`.
